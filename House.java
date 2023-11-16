@@ -21,11 +21,44 @@ public class House extends Building {
   }
 
   /**
+   * Constructs a one story house, sets hasElevator to false, and floor to 1
+   * @param name String name of house
+   * @param address String address of house
+   * @param hasDining boolean true/false if house has dining room 
+   */
+  public House(String name, String address, boolean hasDining) {
+    super(name, address, 1); 
+    residents = new ArrayList<>(); 
+    this.hasDiningRoom = hasDining; 
+    this.hasElevator = false; 
+    System.out.println("You have built a house: 🏠");
+  }
+
+  /**
+   * Construct house with address and hasDining boolean
+   * @param address String address of house
+   * @param hasDining boolean hasDining true/false
+   */
+  public House(String address, boolean hasDining) {
+    super(address);
+    this.hasDiningRoom = hasDining; 
+    this.hasElevator = false; 
+  }
+
+  /**
    * If House has dining room or not
    * @return boolean true/false if house has dining room
    */
   public boolean hasDiningRoom() { 
     return this.hasDiningRoom; 
+  }
+
+  /**
+   * If house has elevator
+   * @return true/false if house has elevator 
+   */
+  public boolean hasElevator() {
+    return this.hasElevator(); 
   }
 
   /**
@@ -70,7 +103,7 @@ public class House extends Building {
    * @return true/false if resident lives in the house or not
    */
   public boolean isResident(String person) { 
-    if(residents.contains(person)) { 
+    if(this.residents.contains(person)) { 
       return true; 
     }
     else {
@@ -78,7 +111,9 @@ public class House extends Building {
     }
   }
   
-
+  /**
+   * prints out options users can do in the House class
+   */
   public void showOptions() {
     System.out.println("Available options at " + this.name + ":\n + enter() \n + exit() \n + goUp() \n + goDown()\n + goToFloor(n) \n moveIn(n) \n moveOut(n) \n nResident() \n isResident(n)");
   }

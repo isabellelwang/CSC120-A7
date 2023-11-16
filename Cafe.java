@@ -1,6 +1,12 @@
 /* This is a stub for the Cafe class */
 public class Cafe extends Building {
 
+    /**
+     * nCoffeeOunces is int, nnumber of ounces of coffee remaining in inventory 
+     * nSugarPackets is int, number of sugar packets in inventory
+     * nCreams is int, number of splashes of cream in inventory 
+     * nCups is int, the number of cups remaining in inventory
+     */
     private int nCoffeeOunces; // The number of ounces of coffee remaining in inventory
     private int nSugarPackets; // The number of sugar packets remaining in inventory
     private int nCreams; // The number of "splashes" of cream remaining in inventory
@@ -47,14 +53,17 @@ public class Cafe extends Building {
         }
     }
 
-    public void sellCoffee(int size, int Creams) {
-        if(nCoffeeOunces - size <= 0 || this.nCreams - nCreams <= 0) {
+    /**
+     * Sells coffee with no sugar
+     * @param size int size of coffee
+     */
+    public void sellCoffee(int size) {
+        if(nCoffeeOunces - size <= 0) {
             throw new RuntimeException("We are out of stock!"); 
         }
         else {
             this.nCups -= nCups; 
-            this.nCoffeeOunces -= size; 
-            this.nCreams -= nCreams; 
+            this.nCoffeeOunces -= size;
         }
     }
     
@@ -73,21 +82,34 @@ public class Cafe extends Building {
         this.nCups += nCups; 
     }
 
+    /** 
+     * void method that restocks sugar packets and creams
+     */
     private void restock(int nSugarPackets, int nCreams) {
         this.nCoffeeOunces += nCoffeeOunces; 
         this.nSugarPackets += nSugarPackets; 
     }
 
+    /**
+     * Prints out available methods users can do 
+     */
     public void showOptions() {
-        System.out.println("Available options at " + this.name + ":\n + enter() \n + exit() \n + goUp() \n + goDown()\n + goToFloor(n) \n sellCoffee() \n restock(nOunces, nSugar, nCream, nCups)");
+        System.out.println("Available options at " + this.name + ":\n + enter() \n + exit() \n + sellCoffee() \n + restock(nOunces) \n + nSugar \n + nCream \n + nCups)");
     }
     
+    /**
+     * throws new runtime exception as cafes only have one floor.
+     */
+    public void goToFloor(int floorNum) {
+        throw new RuntimeException("The cafe only has one floor");
+    }
     
 
     //Testing 
     public static void main(String[] args) {
-        Cafe Familiars = new Cafe("Familiars", "456 Food St.", 1, 2, 3, 4, 2);
-        Familiars.restock(2, 2, 2, 2); 
+        Cafe familiars = new Cafe("Familiars", "456 Food St.", 1, 2, 3, 4, 2);
+        familiars.restock(2, 2, 2, 2); 
+        familiars.restock(5, 5); 
 
         
     }
